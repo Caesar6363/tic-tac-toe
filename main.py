@@ -1,6 +1,6 @@
 import random
 
-# количество клеток
+
 board_size = 3
 board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
 steps = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
@@ -10,7 +10,7 @@ def play_board():
     # Игровое поле
     print('_' * 13)
     for i in range(len(board)):
-        for j in range(len(board)):  # печать игрового поля
+        for j in range(len(board)):
             print('|', board[i][j], end=' ')
 
         print("|\n" + '_' * 13)
@@ -25,13 +25,13 @@ def player_step(x: int, y: int) -> int | None:
 
 
 def clean_last_step(x: int, y: int):
-    steps.pop(steps.index((x, y)))  # удаление по индексу
+    steps.pop(steps.index((x, y)))
 
 
 def random_step_bot():
     # Ход бота
-    coordinates = random.choice(steps)  # рандомные координаты
-    board[coordinates[0]][coordinates[1]] = 'O'  # замена
+    coordinates = random.choice(steps)
+    board[coordinates[0]][coordinates[1]] = 'O' 
 
 
 def step_bot_line():
@@ -46,9 +46,9 @@ def step_bot_line():
 def step_bot_columns():
     # Проверка по столбцам
     for i in range(len(board)):
-        new = board[0][i] + board[1][i] + board[2][i]  # Объединяет все в одну строку
+        new = board[0][i] + board[1][i] + board[2][i]  
         if new.count('X') == 2 and not ''.join(new).isalpha():
-            board[new.find(' ')][i] = 'O'  # Поиск пустой строки. [i] номер столбца
+            board[new.find(' ')][i] = 'O' 
             clean_last_step(new.find(' '), i)
             return 1
 
@@ -91,7 +91,7 @@ def check_win(symbol: str):
             return symbol
 
     for check in range(len(board)):  # столбцы
-        new = board[0][check] + board[1][check] + board[2][check]  # Объединяет все в одну строку
+        new = board[0][check] + board[1][check] + board[2][check] 
         if new.count(symbol) == 3:
             return symbol
 
@@ -109,7 +109,7 @@ def check_win(symbol: str):
 
 
 def block():
-    corners = [(0, 0), (0, 2), (2, 0), (2, 2)]  # углы
+    corners = [(0, 0), (0, 2), (2, 0), (2, 2)]
 
     if board[1][1] == 'X':
         block_bot = random.choice(corners)
